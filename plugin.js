@@ -789,7 +789,7 @@ function WeatherTitleTool() {
     : cur?.weather_code != null
       ? wmo(cur.weather_code, cur.is_day)
       : ['…', '🌡️']
-  const temp = noLoc ? '…' : cur?.temperature_2m != null ? dispTempUnit(cur.temperature_2m) : '—'
+  const temp = noLoc ? '…' : cur?.temperature_2m != null ? dispTempUnit(cur.temperature_2m) : '-'
   return jsx(Popover, {
     children: [
       jsx(PopoverTrigger, {
@@ -799,7 +799,7 @@ function WeatherTitleTool() {
           tabIndex: 0,
           onKeyDown: (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); e.currentTarget.click(); } },
           onClick: () => { if (noLoc) { draftAtom.set(''); editingAtom.set(true) } },
-          title: `${VERSION} — ${place || 'No location'} — ${label}`,
+          title: `${VERSION} - ${place || 'No location'} - ${label}`,
           style: {
             position: 'relative',
             WebkitAppRegion: 'no-drag',
@@ -924,7 +924,7 @@ function ForecastPopover({ geo, fc, hist, place, auto, ip, aq, loc }) {
       : geo.error
         ? `${geo.error.message}`
         : fc.error || !cur || !daily
-          ? 'Weather unavailable — check your connection'
+          ? 'Weather unavailable - check your connection'
           : null
   if (errMsg) {
     return jsxs('div', {
@@ -1062,8 +1062,8 @@ function ForecastPopover({ geo, fc, hist, place, auto, ip, aq, loc }) {
             jsxs('span', {
               className: 'flex shrink-0 gap-1.5 text-xs tabular-nums text-(--ui-text-tertiary)',
               children: [
-                jsx('span', { style: { width: 30 }, className: 'text-right', children: `${prob != null ? prob : '—'}%` }),
-                jsx('span', { style: { width: 40 }, className: 'text-right', children: `${sum != null ? Number(sum).toFixed(1) : '—'}mm` })
+                jsx('span', { style: { width: 30 }, className: 'text-right', children: `${prob != null ? prob : '-'}%` }),
+                jsx('span', { style: { width: 40 }, className: 'text-right', children: `${sum != null ? Number(sum).toFixed(1) : '-'}mm` })
               ]
             })
               ]
@@ -1119,7 +1119,7 @@ function ForecastPopover({ geo, fc, hist, place, auto, ip, aq, loc }) {
                   auto &&
                     jsx('button', {
                       type: 'button',
-                      title: 'Auto location is ON — uses your public IP via ipwho.is to detect location. Click to switch to manual',
+                      title: 'Auto location is ON - uses your public IP via ipwho.is to detect location. Click to switch to manual',
                       className:
                         'rounded border border-(--ui-accent) px-1 text-[0.6875rem] text-(--ui-accent) hover:bg-(--chrome-action-hover)',
                       onClick: () => setAuto(false),
@@ -1206,7 +1206,7 @@ function ForecastPopover({ geo, fc, hist, place, auto, ip, aq, loc }) {
                       jsxs('div', {
                         className: 'flex items-baseline gap-2',
                         children: [
-                          jsx('span', { className: 'text-2xl font-semibold tabular-nums', children: cur?.temperature_2m != null ? dispTempUnit(cur.temperature_2m) : '—' }),
+                          jsx('span', { className: 'text-2xl font-semibold tabular-nums', children: cur?.temperature_2m != null ? dispTempUnit(cur.temperature_2m) : '-' }),
                           jsx('span', { className: 'text-sm text-(--ui-text-secondary)', children: label })
                         ]
                       }),
@@ -1216,7 +1216,7 @@ function ForecastPopover({ geo, fc, hist, place, auto, ip, aq, loc }) {
                       }),
                       jsx('span', {
                         className: 'whitespace-nowrap text-xs text-(--ui-text-tertiary)',
-                        children: `Humidity ${cur?.relative_humidity_2m != null ? cur.relative_humidity_2m : '—'}% · Wind ${dispWind(cur?.wind_speed_10m)}`
+                        children: `Humidity ${cur?.relative_humidity_2m != null ? cur.relative_humidity_2m : '-'}% · Wind ${dispWind(cur?.wind_speed_10m)}`
                       }),
                     ]
                   })
